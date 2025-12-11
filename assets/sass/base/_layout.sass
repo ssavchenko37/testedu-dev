@@ -1,0 +1,39 @@
+@import "./vars"
+@import "./mixins"
+
+*, *:before, *:after
+	box-sizing: border-box
+	min-height: 0.001vw
+
+h1, .h1
+	font-size: 1.75rem
+	letter-spacing: -0.0625rem
+
+h2, .h2
+	font-size: 1.5rem
+	letter-spacing: -0.0625rem
+
+.table
+	th, td
+		font-size:  0.875rem
+	small, .small
+		font-size: 80%
+
+.viewer
+	&.offcanvas.offcanvas-end
+		width: calc(50% + 540px)
+
+	&__close
+		position: absolute
+		top: 15px
+		left: -48px
+		width: 48px
+		height: 38px
+		display: flex
+		align-items: center
+		background: #FFFFFF
+		border-radius: 18px 0 0 18px
+		padding-left: 8px
+
+		.btn-close
+			margin: 0
