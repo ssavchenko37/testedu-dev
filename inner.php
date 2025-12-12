@@ -31,7 +31,7 @@
 	</head>
 	<body>
 		<main>
-			<div class="container-fluid <?php if ($sCore != "ibook") echo "container-xxl"?>" data-layout="container">
+			<div class="container-fluid <?php if (!in_array($sCore, ["ibook","makeup"])) echo "container-xxl"?>" data-layout="container">
 				<nav class="navbar navbar-light navbar-vertical navbar-expand-xl">
 					<div class="d-flex align-items-center">
 						<div class="toggle-icon-wrapper">

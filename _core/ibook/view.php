@@ -64,7 +64,7 @@
 							<?php
 						} else {
 							?>
-							<td class="align-middle text-center edited edited_val<?php echo $isabs?>" data-item_id="<?php echo $item['item_id']?>">
+							<td class="align-middle text-center edited edited_val" data-item_id="<?php echo $item['item_id']?>">
 								<span data-send="<?php echo $cuin?>"><b><?php echo $item['item_val'] ?></b></span>
 							</td>
 							<?php

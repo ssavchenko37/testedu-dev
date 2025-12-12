@@ -1,8 +1,7 @@
 <?php
-// $ibcode = $TS->request_decode('ibcode',$tsreq);
-if (($_POST['mode'] ?? '')) {
-	include "action/action.php";
-}
+if (empty($tsdata['usr']['tutor_dean'])) exit;
+
+$ibcode = $TS->request_decode('ibcode',$tsreq);
 
 $schstr = $filter_tutor = $filter_grm = $filter_grup = $filter_subject = "";
 if (($_POST ?? '')) {
@@ -15,18 +14,24 @@ if (($_POST ?? '')) {
 	$filter_subject = $_POST['filter_subject'];
 }
 
-if ($tsdata['umod'] == "t") {
-	$tutor_id = $filter_tutor = $tsdata['usr']['tutor_id'];
-}
-
-$filter_groupments = $filter_groups = $filter_tutors = [];
-
-$tmp = $DB->select('SELECT * FROM ?_ibook WHERE ibook_type IS NOT NULL {AND tutor_id=?}{AND grm_id=?}{AND grup_id=?}{AND subject_id=?}'
-	, (empty($filter_tutor)) ? DBSIMPLE_SKIP: $filter_tutor
+$absents = $DB->select('SELECT DISTINCT iI.ibook_id, iB.sheet_period, iB.grup_id, iB.grm_id, iB.grm_id, iB.tutor_id, iB.subject_id, G.grup_title'
+	. ' FROM ?_ibook_items iI'
+	. ' INNER JOIN ?_ibook iB ON iI.ibook_id=iB.ibook_id'
+	. ' INNER JOIN ?_groups G ON iB.grup_id=G.grup_id'
+	. ' WHERE is_abs=?'
+	. ' AND iB.sheet_period=?'
+	. ' AND grup_title LIKE(?)'
+	. '{AND iB.grm_id=?}'
+	. '{AND iB.grup_id=?}'
+	. '{AND iB.tutor_id=?}'
+	. '{AND iB.subject_id=?}'
+	, 1
+	, $sheet_period
+	, '%' . $tsdata['usr']['tutor_dean'] . '%'
 	, (empty($filter_grm)) ? DBSIMPLE_SKIP: $filter_grm
 	, (empty($filter_grup)) ? DBSIMPLE_SKIP: $filter_grup
+	, (empty($filter_tutor)) ? DBSIMPLE_SKIP: $filter_tutor
 	, (empty($filter_subject)) ? DBSIMPLE_SKIP: $filter_subject
-
 );
 
 $grm_title = $DB->select('SELECT dept_id AS ARRAY_KEY, dept_title, plan_id, semester_id FROM ?_groupments ORDER BY dept_ord');
@@ -39,35 +44,9 @@ $subj_title = $DB->select('SELECT S.subject_id AS ARRAY_KEY, S.plan_id, S.semest
 	. ' INNER JOIN ?_3v_semesters SEM ON S.semester_id=SEM.semester_id'
 );
 $tutors_name = $TS->tutorsName();
-foreach ($tmp as $r) {
+foreach($absents as $r) {
 	$filter_tutors[$r['tutor_id']] = $tutors_name[$r['tutor_id']];
 	$filter_groupments[$r['grm_id']] = $grm_title[$r['grm_id']]['dept_title'];
 	$filter_groups[$r['grup_id']] = $grup_title[$r['grup_id']]['grup_title'];
-
 	$filter_subjects[$r['subject_id']] = _lt([$subj_title[$r['subject_id']]['full_subject_ru'], $subj_title[$r['subject_id']]['full_subject_en']]);
-
-	$tutor_grm[$r['tutor_id']]['grm'][$r['grm_id']] = $r['grm_id'];
 }
-
-$ibooks = $DB->select('SELECT IB.*'
-	. ', T.tutor_fullru, T.tutor_fullname'
-	. ', GR.grup_title'
-	. ', CONCAT(S.subject_code, " / ", S.subject_title) AS title_en'
-	. ', CONCAT(S.subject_code, " / ", S.subject_ru) AS title_ru'
-	. ', CONCAT(S.subject_code, " / ", S.subject_kg) AS title_kg'
-	. ' FROM ?_ibook IB'
-	. ' INNER JOIN ?_tutor T ON IB.tutor_id=T.tutor_id'
-	. ' INNER JOIN ?_groups GR ON IB.grup_id=GR.grup_id'
-	. ' INNER JOIN ?_3v_subjects S ON IB.subject_id=S.subject_id'
-	. ' WHERE IB.sheet_period=?'
-	. '{AND IB.tutor_id=?}'
-	. '{AND IB.grm_id=?}'
-	. '{AND IB.grup_id=?}'
-	. '{AND IB.subject_id=?}'
-	. ' ORDER BY T.tutor_fullru, S.subject_code + 1'
-	, $sheet_period
-	, (empty($filter_tutor)) ? DBSIMPLE_SKIP: $filter_tutor
-	, (empty($filter_grm)) ? DBSIMPLE_SKIP: $filter_grm
-	, (empty($filter_grup)) ? DBSIMPLE_SKIP: $filter_grup
-	, (empty($filter_subject)) ? DBSIMPLE_SKIP: $filter_subject
-);

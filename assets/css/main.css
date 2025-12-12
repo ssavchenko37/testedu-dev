@@ -81,6 +81,10 @@ td .btn-group .dropdown-toggle::after {
   display: inline-block;
 }
 
+.showed span {
+  cursor: pointer;
+}
+
 .edited {
   border-top: 5px;
 }
@@ -311,6 +315,9 @@ td .btn-group .dropdown-toggle::after {
 }
 .table-frozen .table td.bg-abs, .table-meta .table td.bg-abs {
   background: rgba(230, 55, 87, 0.2);
+}
+.table-frozen .table td.bg-reabs, .table-meta .table td.bg-reabs {
+  background: rgba(0, 210, 122, 0.2);
 }
 .table-frozen .edited b, .table-meta .edited b {
   min-width: 48px;

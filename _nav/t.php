@@ -31,9 +31,9 @@
 	<a class="nav-link" href="/ibooks/" role="button">
 		<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-book-open"></i></span><span class="nav-link-text"><?php _l("Журналы");?></span></div>
 	</a>
-	<?php if (!empty($facultyDean)) { ?>
-		<a class="nav-link" href="/attend/" role="button">
-			<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-ban"></i></span><span class="nav-link-text"><?php _l("Посещаемость");?></span></div>
+	<?php if (!empty($tsdata['usr']['tutor_dean'])) { ?>
+		<a class="nav-link" href="/makeups/" role="button">
+			<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-ban"></i></span><span class="nav-link-text"><?php _l("Отработки");?></span></div>
 		</a>
 	<?php } ?>
 	

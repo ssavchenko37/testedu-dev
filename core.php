@@ -39,8 +39,6 @@ if ( $tsdata['umod'] == "t") {
 		$usrAvaImg = "/" . S_AVA . "/no-ava.png";
 	}
 	$userName = $usrAvaAlt = (!empty($tsdata['usr']['tutor_fullru']) && $lang == "ru") ? $tsdata['usr']['tutor_fullru']: $tsdata['usr']['tutor_fullname'];
-	$facultyDean = ($tsdata['usr']['tutor_id'] == 53) ? 'ВОПр': $facultyDean;
-	$facultyDean = ($tsdata['usr']['tutor_id'] == 214) ? 'DGP': $facultyDean;
 }
 if ( $tsdata['umod'] == "a") {
 	$userName = $usrAvaAlt = $tsdata['usr']['description'];
