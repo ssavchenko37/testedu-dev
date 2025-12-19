@@ -116,10 +116,8 @@
 			<td class="align-middle"><?php echo $r['grup_title']?></td>
 			<td class="align-middle"><?php echo _lt([$r['title_ru'],$r['title_en'],$r['title_kg']])?></td>
 			<td class="align-middle text-center">
-				<div class="get-book">
-					<a class="btn btn-success btn-sm" role="button" href="/ibook/?<?php echo $request?>"><i class="fa-solid fa-book-open"></i></a>
-					<!-- <button class="btn btn-danger btn-sm" type="button" data-mod="delete" data-page="delete"><i class="far fa-trash-alt"></i></button> -->
-				</div>
+				<a class="get_details btn btn-success btn-sm" role="button" href="/ibook/?<?php echo $request?>"><i class="fa-solid fa-book-open"></i></a>
+				<!-- <button class="btn btn-danger btn-sm" type="button" data-mod="delete" data-page="delete"><i class="far fa-trash-alt"></i></button> -->
 			</td>
 		</tr>
 		<?php

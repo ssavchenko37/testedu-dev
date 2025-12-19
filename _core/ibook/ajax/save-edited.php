@@ -68,16 +68,21 @@ if ($mode == "edited_val") {
 
 if ($mode == "edited_unit") {
 	$unit_id = -1;
+	$max_rate = 40;
+	$max_rate = ($post['field'] == "score_atten") ? 20: $max_rate;
+	$rate = (int)$post['rate'];
+	$rate = ($rate > $max_rate) ? $max_rate: $rate; 
+	
 	if (empty($post['unit_id'])) {
 		$ins['ibook_id'] = $ibook_id;
 		$ins['stud_id'] = $post['stud_id'];
 		$ins['unit_num'] = $post['unit_num'];
-		$ins[$post['field']] = trim($post['rate']);
+		$ins[$post['field']] = $rate;
 		$ins['who'] = $usr;
 		$unit_id = $DB->query('INSERT INTO ?_ibook_units (?#) VALUES (?a)', array_keys($ins), array_values($ins));
 	} else {
 		$unit_id = $post['unit_id'];
-		$upd[$post['field']] = (empty($post['rate'])) ? NULL: $post['rate'];
+		$upd[$post['field']] = (empty($rate)) ? NULL: $rate;
 		$upd['who'] = $usr;
 		$DB->query('UPDATE ?_ibook_units SET ?a WHERE unit_id=?', $upd, $unit_id);
 	}

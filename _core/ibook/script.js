@@ -149,7 +149,6 @@ const iBookCtrl = () => {
 						if (td.classList.contains('edited_unit')) {
 							dataSend = { ibook_id: ibook_id, mode: 'edited_unit', 'rate': newVal, stud_id: stud_id, unit_id: td.dataset.unit_id, unit_num: td.dataset.unit_num, field: span.dataset.send}
 						}
-						console.log(dataSend);
 						fetch('/_core' + window.location.pathname + 'ajax/save-edited.php', {
 							method: 'POST',
 							headers: {
@@ -157,10 +156,8 @@ const iBookCtrl = () => {
 							},
 							body: JSON.stringify(dataSend)
 						})
-						// .then(response => response.json())
 						.then(response => response.text())
 						.then(text => {
-							console.log(text);
 							const data = JSON.parse(text);
 							if (data.status === 'success') {
 								if (td.classList.contains('edited_val')) {

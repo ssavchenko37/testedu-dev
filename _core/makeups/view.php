@@ -108,9 +108,7 @@
 			<td class="align-middle"><?php echo $r['grup_title']?></td>
 			<td class="align-middle"><?php echo $filter_subjects[$r['subject_id']]?></td>
 			<td class="align-middle text-center">
-				<div class="get-book">
-					<a class="btn btn-success btn-sm" role="button" href="/makeup/?<?php echo $request?>"><i class="fa-solid fa-book-open"></i></a>
-				</div>
+				<a class="get_details btn btn-success btn-sm" role="button" href="/makeup/?<?php echo $request?>"><i class="fa-solid fa-book-open"></i></a>
 			</td>
 		</tr>
 		<?php

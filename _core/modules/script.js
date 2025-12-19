@@ -210,3 +210,5 @@ const moduleHandler = (mdate) => {
 		buildSubjects();
 	});
 };
+
+docReady(restoreFilters);

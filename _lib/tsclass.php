@@ -272,6 +272,18 @@ class TS_cli
 			, $opt['start'], $opt['limit']
 	  );
 	}
+	public function module($module_id, $results_flag)
+	{
+		$module = $this->db->selectRow('SELECT * FROM ?_3v_modules WHERE module_id=?', $module_id);
+		$results = [];
+		if ($module['module_id'] > 0 && $results_flag) {
+			$results = $this->db->select('SELECT * FROM ?_3v_module_results WHERE module_id=?', $module['module_id']);
+		}
+		return [
+			'module' => $module,
+			'results' => $results,
+		];
+	}
 
 	public function exams($opt)
 	{

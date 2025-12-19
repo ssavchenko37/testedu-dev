@@ -101,6 +101,33 @@ td .btn-group .dropdown-toggle::after {
   border: 1px solid #F5F5F5;
 }
 
+.table-sheet {
+  background: #FFFFFF;
+}
+.table-sheet th, .table-sheet td {
+  padding: 0.125rem 0.5rem;
+}
+
+.modal-header strong {
+  font-size: 1.125rem;
+}
+.modal-warning {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+.modal-warning .icon svg {
+  height: 36px;
+}
+.modal-warning .text {
+  padding: 20px 0;
+  font-size: 0.875rem;
+}
+
 .tsaside {
   z-index: -1;
   position: fixed;

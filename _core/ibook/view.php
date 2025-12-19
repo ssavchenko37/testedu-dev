@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-md-2 text-end">
 			<div class="ctrlBtn">
-				<a href="/ibooks/" class="btn btn-sm btn-secondary" role="button"> <i class="fa fa-angle-left" aria-hidden="true"></i> Back to iBooks </a>
+				<a href="/ibooks/" class="btn btn-sm btn-secondary" role="button"> <i class="fa fa-angle-left" aria-hidden="true"></i> <?php _l('Назад')?> </a>
 			</div>
 		</div>
 	</div>

@@ -88,6 +88,19 @@ function _lt( $texts ){
 	global $lang;
 	return ( $lang == "ru" ) ? $texts[0] : $texts[1];
 }
+/************************************************************************** translate Phrase $text
+ * @param string $stud_name
+ */
+function _ls( $stud_name ){
+	global $lang;
+	$texts = [];
+	$arr = explode('/',$stud_name);
+	$texts = $arr;
+	if (count($arr) == 1) {
+		$texts[1] = $arr[0];
+	}
+	return ( $lang == "ru" ) ? trim($texts[1]) : trim($texts[0]);
+}
 
 /************************************************************************** Main nav
  * @param array $r
@@ -658,27 +671,35 @@ function tutor_meta($list, $mode, $did=false, $btn=false) {
  * @param array $rate
  * @return array $assest
  */
-function get_assest($r, $rate) {
+function get_assest($percent, $rate) {
 	global $DB;
 	if (count($rate) == 0) {
 		$rate = $DB->selectRow('SELECT * FROM ?_rate_scale WHERE rate_id=?', 1);
 	}
 	$assest = array();
-	if( $r <= $rate['excellent_max'] ) {
+	if( $percent <= $rate['excellent_max'] ) {
 		$assest['number'] = "5";
 		$assest['title'] = "(отл)";
+		$assest['ru'] = "отлично";
+		$assest['en'] = "excellent";
 	}
-	if( $r <= $rate['good_max'] ) {
+	if( $percent <= $rate['good_max'] ) {
 		$assest['number'] = "4";
 		$assest['title'] = "(хор)";
+		$assest['ru'] = "хорошо";
+		$assest['en'] = "good";
 	}
-	if( $r <= $rate['fair_max'] ) {
+	if( $percent <= $rate['fair_max'] ) {
 		$assest['number'] = "3";
 		$assest['title'] = "(удов)";
+		$assest['ru'] = "удов.";
+		$assest['en'] = "fair";
 	}
-	if( $r <= $rate['low_max'] ) {
+	if( $percent <= $rate['low_max'] ) {
 		$assest['number'] = "2";
 		$assest['title'] = "(неуд)";
+		$assest['ru'] = "неуд.";
+		$assest['en'] = "low";
 	}
 	return $assest;
 }
@@ -896,7 +917,7 @@ function check_allowed($s) {
 
 	foreach ($s as $k=>$r) {
 		if(in_array($k, array('module1','module2','module3','module4'))) {
-			if ($q < $s['s_credits']) {
+			if ($q < $s['modules']) {
                 if ($allowed == 1) {
 					$allowed = ($r < $module_min) ? 0 : $allowed;
                 }
@@ -910,16 +931,16 @@ function check_allowed($s) {
 	}
 	$avg = ceil($modules_total/$q);
 	$check['avg_accept'] = ($allowed < 1) ? 0: 1;
-	$allowed = ($avg < MIN_PERCENT) ? 0: $allowed; /*31 Jun 2024 update*/
+	$allowed = ($avg < MIN_PERCENT) ? 0: $allowed;
 	$check['allowed'] = $allowed;
-
-    if ($qty < $s['s_credits']) {
+	
+    if ($qty < $s['modules']) {
 		$check['calc'] = true;
-		$check['text'] = ($s['exam_id'] > 0) ? "не допуск": "не зачет";
+		$check['text'] = ($s['hasexam']) ? "не допуск": "не зачет";
 		if ($allowed == 1) {
 			$check['icon'] = "fa-check-square";
 			$check['type'] = "text-success";
-			$check['text'] = ($s['exam_id'] > 0) ? "допуск": "зачет";
+			$check['text'] = ($s['hasexam']) ? "допуск": "зачет";
 		} else {
 			$check['type'] = "text-danger";
         }

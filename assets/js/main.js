@@ -389,7 +389,7 @@ const questionFiltersHandler = () => {
 }
 docReady(questionFiltersHandler);
 
-const GrmGroupsSelect = () => {
+const filtersHandler = () => {
 	const frm = document.getElementById('frm0');
 	const filter_names = ["filter_grm","filter_grup","filter_tutor","filter_subject","filter_sem","filter_mdl","filter_daterange"];
 	filter_names.forEach((f) => {
@@ -408,4 +408,53 @@ const GrmGroupsSelect = () => {
 		});
 	});
 }
-docReady(GrmGroupsSelect);
+docReady(filtersHandler);
+
+const restoreFilters = () => {
+	let last;
+	const viewButtons = document.getElementsByClassName('get_details');
+	if (viewButtons) {
+		for(let btn of viewButtons) {
+			btn.addEventListener('click', (e) => {
+				const data = {};
+				document.getElementById('frm0').querySelectorAll('select').forEach(s => data[s.name] = s.value);
+				localStorage.setItem('filterValues', JSON.stringify(data));
+				localStorage.setItem('getDetails', e.currentTarget.href.split('?')[1]);
+			});
+		}	
+	}
+
+	const savedFilters = localStorage.getItem('filterValues');
+	if (savedFilters) {
+		const data = JSON.parse(savedFilters);
+		document.querySelectorAll('select').forEach(s => {
+			if (data[s.name]) {
+				s.value = data[s.name];
+				if (s.value > 0) {
+					last = s;
+				}
+			}
+		});
+		if (last !== undefined) {
+			last.dispatchEvent(new Event('input', { bubbles: true }));
+		}
+		localStorage.removeItem('filterValues');
+	}
+
+	if (last === undefined) {
+		const savedDetails = localStorage.getItem('getDetails');
+		if (savedDetails) {
+			const details_link = Array.from(viewButtons).find(a => a.href.includes(savedDetails));
+			if (details_link) {
+				const from_tr = details_link.closest('.rws');
+				if (!from_tr) return;
+				from_tr.classList.add('table-success');
+				from_tr.scrollIntoView({behavior: 'smooth', block: 'center'});
+				from_tr.addEventListener('mouseenter', (e) => {
+					e.target.classList.remove('table-success');
+				});
+			}
+			localStorage.removeItem('getDetails');
+		}
+	}
+}

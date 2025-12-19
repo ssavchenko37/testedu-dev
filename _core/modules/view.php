@@ -164,6 +164,7 @@
 				$str_groups .= "<span class=\"text-nowrap\">" . $groups[$g] . "</span>; ";
 			}
 			$str_groups = substr($str_groups, 0, -2);
+			$request = $TS->request_encode('mdcode', $r['module_id']);
 			?>
 			<tr class="rws <?php echo $tr_class?>">
 				<td class="align-middle"><?php echo $r['sDate']?><br /><small><?php echo $r['sTime']?></small></td>
@@ -188,7 +189,7 @@
 							?>
 						</div>
 						<?php if( $res_total > 0 ) { ?>
-							<a href="?module_res_id=<?php echo $r['module_id']?>" class="btn btn-secondary btn-sm" role="button">
+							<a href="/module/?<?php echo $request?>" class="get_details btn btn-secondary btn-sm" role="button">
 								<?php echo $res_total?> <i class="mx-1 fas fa-lg fa-poll"></i>
 							</a>
 						<?php } else { ?>

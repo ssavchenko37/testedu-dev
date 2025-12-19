@@ -35,7 +35,6 @@
 			? "<span class='text-muted p-1'>No</span>"
 			: "<span class='bg-success py-1 px-2 rounded text-white'>Yes</span>"
 		;
-		$stud_name = ($lang == "ru") ? $r['stud_ru']: $r['stud_name'];
 		$ava = '';
 		if (is_file(S_AVA . DIRECTORY_SEPARATOR . $r['stud_pic'])) {
 			$ava = DIRECTORY_SEPARATOR . S_AVA . DIRECTORY_SEPARATOR . $r['stud_pic'];	
@@ -44,7 +43,7 @@
 		<tr class="rws <?php echo $tr_class?>">
 			<td class="align-middle"><?php echo $q?></td>
 			<td class="align-middle"><img class="stud-pic" src="<?php echo $ava?>" alt="No ava"></td>
-			<td class="align-middle"><?php echo $stud_name?><br></td>
+			<td class="align-middle"><?php echo _ls($r['stud_name'])?><br></td>
 			<td class="align-middle"><?php echo $r['record_book']?></td>
 			<td class="align-middle"><?php echo $is_account?></td>
 			<td class="align-middle"><?php echo $stud_status?></td>
