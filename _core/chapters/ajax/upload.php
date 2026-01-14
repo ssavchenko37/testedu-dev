@@ -1,6 +1,3 @@
-<?php
-require_once '../../../kernel.php';
-?>
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="upload">
     <div class="col-sm-12 offset-md-1 col-md-10 col-lg-9 col-xl-8">

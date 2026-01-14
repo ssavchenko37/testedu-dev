@@ -9,13 +9,13 @@
 	<a class="nav-link" href="/trial/" role="button">
 		<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-user-pen"></i></span><span class="nav-link-text"><?php _l("Пробный");?></span></div>
 	</a>
-	<a class="nav-link" href="/trial/" role="button">
+	<a class="nav-link" href="/modules/" role="button">
 		<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-pencil"></i></span><span class="nav-link-text"><?php _l("Модули");?></span></div>
 	</a>
-	<a class="nav-link" href="/modules/" role="button">
+	<a class="nav-link" href="/modules-results/" role="button">
 		<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-regular fa-square-check"></i></span><span class="nav-link-text"><?php _l("Результаты модулей");?></span></div>
 	</a>
-	<a class="nav-link" href="/modules-results/" role="button">
+	<a class="nav-link" href="/exams/" role="button">
 		<div class="d-flex align-items-center"><span class="nav-link-icon"><i class="fa-solid fa-pen-nib"></i></span><span class="nav-link-text"><?php _l("Экзамены");?></span></div>
 	</a>
 	<a class="nav-link" href="/exams-results/" role="button">

@@ -82,14 +82,17 @@
 						</a>
 						<form class="m-0 ms-auto" action="" method="post">
 							<div class="row ms-0">
+								<?php if ( $tsdata['umod'] !== "s") { ?>
 								<label for="sheet_period" class="g-0 col-3 text-end col-form-label col-form-label-sm"><?php _l("Период")?>: </label>
 								<div class="col-9">
-									<select class="form-select form-select-sm" id="sheet_period" name="sheet_period">
+									<select class="form-select form-select-sm nav-sheet-period" id="sheet_period" name="sheet_period">
 										<?php echo getOptions($sheet_period, $period['list']) ?>
 									</select>
 								</div>
+								<?php } ?>
 							</div>
 						</form>
+						
 						<ul class="navbar-nav navbar-nav-icons flex-row align-items-center">
 							<li class="nav-item ps-2 pe-0">
 								<div class="dropdown theme-control-dropdown">
@@ -130,26 +133,26 @@
 									<div class="bg-white dark__bg-1000 rounded-2 py-2">
 										<strong class="dropdown-item"><?php echo $userName?></strong>
 										<div class="dropdown-divider"></div>
-										<?php if ( $tsdata['umod'] == "tch") { ?>
+										<?php if ( $tsdata['umod'] == "t") { ?>
 											<a class="dropdown-item" href="/t/profile"><?php _l("Профиль")?></a>
 											<a class="dropdown-item" href="/t/avatar"><?php _l("Изменить фото")?></a>
 											<a class="dropdown-item" href="/t/password/"><?php _l("Изменить пароль")?></a>
 											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="/t/settings/"><?php _l("Настройки")?></a>
 										<?php } ?>
-										<?php if ( $tsdata['umod'] == "std") { ?>
+										<?php if ( $tsdata['umod'] == "s") { ?>
 											<a class="dropdown-item" href="/s/profile"><?php _l("Профиль")?></a>
 											<a class="dropdown-item" href="/s/avatar"><?php _l("Изменить фото")?></a>
 											<a class="dropdown-item" href="/s/password/"><?php _l("Изменить пароль")?></a>
 											<div class="dropdown-divider"></div>
 										<?php } ?>
-										<a class="dropdown-item" href="/t/settings/"><?php _l("Настройки")?></a>
 										<a class="dropdown-item" href="/logout/"><?php _l("Выйти")?></a>
 									</div>
 								</div>
 							</li>
 						</ul>
 					</nav>
-                    <div id="workspace" class="ws">
+					<div id="workspace" class="ws">
 						<?php
 						if (is_file(S_ROOT . "/_core/" . $sMod . "/" . $sCore . "/view.php")) {
 							include S_ROOT . "/_core/" .$sMod . "/" . $sCore . "/view.php";
@@ -159,7 +162,7 @@
 						}
 						?>
 						<?php include 'aside.php'; ?>
-                    </div>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -176,8 +179,12 @@
 		<script src="/assets/js/flatpickr.js"></script>
 		<script src="/assets/js/flatpickr_ru.js"></script>
 		<script src="/assets/js/main.js?v=<?php echo time()?>"></script>
-        <?php if (is_file(S_ROOT . "/_core/" . $sCore . "/script.js")) { ?>
-            <script src="<?php echo "/_core/" . $sCore . "/script.js?v=" . time()?>"></script>
-        <?php } ?>
+		<?php if (is_file(S_ROOT . "/_core/" . $sCore . "/script.js") && $globalMain) { ?>
+			<script src="<?php echo "/_core/" . $sCore . "/script.js?v=" . time()?>"></script>
+		<?php } ?>
+
+		<?php if (is_file(S_ROOT . "/_core/" . $sMod . "/" . $sCore . "/script.js")) { ?>
+			<script src="<?php echo "/_core/" . $sMod . "/" . $sCore . "/script.js?v=" . time()?>"></script>
+		<?php } ?>
 	</body>
 </html>

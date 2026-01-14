@@ -1,5 +1,4 @@
 <?php
-require_once '../../../kernel.php';
 $id = $_POST['pid'];
 $mode = $_POST['mod'];
 
@@ -32,7 +31,8 @@ if (count($sids) > 0) {
 <table class="table table-striped table-hover border-secondary-subtle">
 	<thead>
 	<tr class="fixed-row sticky-top">
-		<th class="w-30"><?php _l('Кафедра')?></th>
+		<th class="w-25"><?php _l('Кафедра')?></th>
+		<th class="w-5"><?php _l('Тип')?></th>
 		<th class="w-25"><?php _l('Предмет')?></th>
 		<th class="w-35"><?php _l('Группы')?></th>
 		<th class="w-10 text-right">&nbsp;</th>
@@ -42,11 +42,18 @@ if (count($sids) > 0) {
 	<?php
 	$q = 1;
 	foreach ($subjs as $r) {
+		$stype = ($r['stype'] == "lc") 
+			? _ll('Лекция')
+			: _ll('Практика')
+		;
 		?>
 		<tr class="rws">
 			<td class="align-middle" title="<?php echo $r['dept_id']?>">
 				<small><?php echo $r['dept_code']?></small>
 				<?php echo _lt([$r['dept_ru'],$r['dept_title']])?>
+			</td>
+			<td class="align-middle">
+				<?php echo $stype?>
 			</td>
 			<td class="align-middle">
 				<?php echo _lt([$r['subject_ru'],$r['subject_en']])?><br>

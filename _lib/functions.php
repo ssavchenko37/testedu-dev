@@ -30,6 +30,33 @@ function cook2code($str)
 	$ep = str_replace("_", "=", $ep);
 	return json_decode(base64_decode($bp . $ep));
 }
+/************************************************************************** ctrl cookies data
+ * @param array $arr
+ * @return string
+ */
+function auth2cook($arr)
+{
+	$data = json_encode($arr, JSON_UNESCAPED_UNICODE);
+	$sign = hash_hmac('sha256', $data, TS_SECRET);
+	$str = base64_encode($data . "|" . $sign);
+	$bp = substr($str, 0, 8);
+	$ep = str_replace("=","_",substr($str, 8));
+	return $ep . $bp;
+}
+/************************************************************************** ctrl cookies data
+ * @param string $str
+ * @return object
+ */
+function cook2auth($str)
+{
+	$bp = substr($str, -8);
+	$ep = str_replace($bp, "", $str);
+	$ep = str_replace("_", "=", $ep);
+	$decoded = base64_decode($bp . $ep);
+	[$data, $sign] = explode('|', $decoded);
+	$validSign = hash_hmac('sha256', $data, TS_SECRET);
+	return (hash_equals($validSign, $sign)) ? json_decode($data): null;
+}
 
 
 function getPath()
@@ -1027,7 +1054,7 @@ function studentShort($sname) {
 	if ($is_kyzy || $is_uluu) {
 		$re = $str;
 	} else {
-		$arr = explode(" ", $str);
+		$arr = explode(" ", trim($str));
 		$s1 = (!empty($arr[1])) ? mb_substr($arr[1], 0, 1, "utf-8") . "." : "";
 		$s2 = (!empty($arr[2])) ? mb_substr($arr[2], 0, 1, "utf-8") . "." : "";
 		$re = $arr[0] . " " . $s1 . $s2;

@@ -1,6 +1,4 @@
 <?php
-require_once '../../../kernel.php';
-
 $ids = $_POST['ibooks'];
 $re = array();
 $re['status']  = 'error';

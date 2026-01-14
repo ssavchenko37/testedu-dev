@@ -40,8 +40,7 @@ const buildGroups = () => {
 			gid: grmID,
 			stype: stype
 		};
-		console.log(dataSend);
-		fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+		fetch('/api' + window.location.pathname + 'handlers', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

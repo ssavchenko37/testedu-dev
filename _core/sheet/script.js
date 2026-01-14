@@ -8,7 +8,7 @@ const summaryCalcHandler = () => {
 
 	const enteredHandler = (inpdate) => {
 		const dataSend = { mode: 'date', sheet_id: sheet_id, m_date: inpdate.value, module: inpdate.id }
-		fetch('/_core' + window.location.pathname + 'ajax/save-sheet-data.php', {
+		fetch('/api' + window.location.pathname + 'save-sheet-data', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(dataSend)
@@ -52,7 +52,7 @@ const summaryCalcHandler = () => {
 	document.getElementById('assist').addEventListener('blur', (e) => {
 		const inpassist = e.currentTarget;
 		const dataSend = { mode: 'assist', sheet_id: sheet_id, assist: inpassist.value }
-		fetch('/_core' + window.location.pathname + 'ajax/save-sheet-data.php', {
+		fetch('/api' + window.location.pathname + 'save-sheet-data', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(dataSend)
@@ -116,7 +116,7 @@ const summaryCalcHandler = () => {
 				if (newVal !== val) {
 					const dataSend = { exam_id: exam_id, item_id: item_id, 'rate': newVal, 'field': field, s_credits: s_credits }
 
-					fetch('/_core' + window.location.pathname + 'ajax/save-rate.php', {
+					fetch('/api' + window.location.pathname + 'save-rate', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'

@@ -31,12 +31,15 @@ $filter_departments = ($lang == "ru")
 ;
 
 $filter_subjects = $filter_semesters = $filter_modules = $filter_tutors = [];
-$tmp_sbj = $DB->select('SELECT S.subject_code AS ARRAY_KEY, S.subject_code, S.subject_title, S.subject_ru'
+$tmp_sbj = $DB->select('SELECT S.subject_code AS ARRAY_KEY, S.subject_id, S.subject_code, S.subject_title, S.subject_ru'
 	. ' FROM ?_3v_subjects S'
 	. ' INNER JOIN ?_3v_chapters C ON S.subject_code=C.subject_code'
+	. ' WHERE S.subject_code NOT IN (?a)'
+	. ' ORDER BY subject_id DESC'
+	, ["IGA","IGA2"]
 );
 foreach ($tmp_sbj as $code => $r) {
-	$title = ($lang == "ru") ? $r['subject_title']: $r['subject_ru'];
+	$title = ($lang == "ru") ? $r['subject_ru']: $r['subject_title'];
 	$filter_subjects[$code] = $r['subject_code'] . ") " . $title;
 }
 

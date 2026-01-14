@@ -1,17 +1,15 @@
 <?php
-require_once '../../../kernel.php';
 $id = $_POST['pid'];
 $mode = $_POST['mod'];
-// 
 
 $modules = $DB->selectCol('SELECT DISTINCT chapter_modul AS ARRAY_KEY, chapter_modul FROM ?_3v_chapters'); 
 $semesters = $DB->selectCol('SELECT semester_id AS ARRAY_KEY, semester_title FROM ?_3v_semesters');
 $subjects = array();
-$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_code, subject_ru, subject_title'
+$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_id, subject_code, subject_ru, subject_title'
 	. ' FROM ?_3v_subjects'
 	. ' WHERE subject_code IS NOT NULL'
 	. ' {AND dept_code=?}'
-	. ' ORDER BY subject_code'
+	. ' ORDER BY subject_code, subject_id DESC'
 	, empty($filter_dept) ? DBSIMPLE_SKIP : $filter_dept
 );
 foreach ($tmp as $r) {

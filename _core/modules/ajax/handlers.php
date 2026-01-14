@@ -1,7 +1,5 @@
 <?php
-require_once '../../../kernel.php';
 header('Content-Type: application/json; charset=utf-8');
-
 
 $json = file_get_contents('php://input');
 $post = json_decode($json, true);

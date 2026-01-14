@@ -35,10 +35,13 @@ $questions = $DB->select('SELECT *'
     , empty($filter_semester) ? DBSIMPLE_SKIP :  '____.' . $filter_semester .'.%'
     , empty($filter_module) ? DBSIMPLE_SKIP :  '____._.' . $filter_module .'.%'
 );
+if (!empty($ccode)) {
+    [$filter_subject, $filter_semester, $filter_module, $theme] = explode('.',$ccode);
+}
 
-$answersV3 = $DB->selectCol('SELECT question_code AS ARRAY_KEY, COUNT(answer_id) AS ans_total FROM ?_3v_answers GROUP BY question_code');
+// $answersV3 = $DB->selectCol('SELECT question_code AS ARRAY_KEY, COUNT(answer_id) AS ans_total FROM ?_3v_answers GROUP BY question_code');
 
-$modules = $DB->selectCol('SELECT DISTINCT chapter_modul AS ARRAY_KEY, chapter_modul FROM ?_3v_chapters'); 
+$modules = $DB->selectCol('SELECT DISTINCT chapter_modul AS ARRAY_KEY, chapter_modul FROM ?_3v_chapters WHERE chapter_modul>?', 0); 
 
 $departments = ($lang == "ru") 
     ? $DB->selectCol('SELECT dept_code AS ARRAY_KEY, CONCAT(dept_code, " ", dept_ru) FROM ?_departments ORDER BY dept_code')
@@ -47,11 +50,11 @@ $departments = ($lang == "ru")
 $semesters = $DB->selectCol('SELECT semester_id AS ARRAY_KEY, semester_title FROM ?_3v_semesters');
 
 $subjects = array();
-$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_code, subject_ru, subject_title'
+$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_id, subject_code, subject_ru, subject_title'
     . ' FROM ?_3v_subjects'
     . ' WHERE subject_code IS NOT NULL'
     . ' {AND dept_code=?}'
-    . ' ORDER BY subject_code'
+    . ' ORDER BY subject_code, subject_id DESC'
     , empty($filter_dept) ? DBSIMPLE_SKIP : $filter_dept
 );
 foreach ($tmp as $r) {

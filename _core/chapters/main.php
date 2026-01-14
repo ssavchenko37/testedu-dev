@@ -37,7 +37,7 @@ $chapters = $DB->select('SELECT *'
 
 $questionsV3 = $DB->selectCol('SELECT chapter_code AS ARRAY_KEY, COUNT(question_id) AS qst_total FROM ?_3v_questions GROUP BY chapter_code');
 
-$modules = $DB->selectCol('SELECT DISTINCT chapter_modul AS ARRAY_KEY, chapter_modul FROM ?_3v_chapters'); 
+$modules = $DB->selectCol('SELECT DISTINCT chapter_modul AS ARRAY_KEY, chapter_modul FROM ?_3v_chapters WHERE chapter_modul>?', 0); 
 
 $departments = ($lang == "ru") 
 	? $DB->selectCol('SELECT dept_code AS ARRAY_KEY, CONCAT(dept_code, " ", dept_ru) FROM ?_departments ORDER BY dept_code')
@@ -46,11 +46,11 @@ $departments = ($lang == "ru")
 $semesters = $DB->selectCol('SELECT semester_id AS ARRAY_KEY, semester_title FROM ?_3v_semesters');
 
 $subjects = array();
-$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_code, subject_ru, subject_title'
+$tmp = $DB->select('SELECT DISTINCT subject_code AS ARRAY_KEY, subject_id, subject_code, subject_ru, subject_title'
 	. ' FROM ?_3v_subjects'
 	. ' WHERE subject_code IS NOT NULL'
 	. ' {AND dept_code=?}'
-	. ' ORDER BY subject_code'
+	. ' ORDER BY subject_code, subject_id DESC'
 	, empty($filter_dept) ? DBSIMPLE_SKIP : $filter_dept
 );
 foreach ($tmp as $r) {

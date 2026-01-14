@@ -55,7 +55,7 @@ const iBookCtrl = () => {
 		const colalt = col.getElementsByClassName('entered-alt')[0];
 		const meta_id = col.dataset.meta_id;
 		const dataSend = { ibook_id: ibook_id, meta_id: meta_id, meta_date: coldate.value, meta_uin: coldate.id }
-		fetch('/_core' + window.location.pathname + 'ajax/meta-entered.php', {
+		fetch('/api' + window.location.pathname + 'meta-entered', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ const iBookCtrl = () => {
 						if (td.classList.contains('edited_unit')) {
 							dataSend = { ibook_id: ibook_id, mode: 'edited_unit', 'rate': newVal, stud_id: stud_id, unit_id: td.dataset.unit_id, unit_num: td.dataset.unit_num, field: span.dataset.send}
 						}
-						fetch('/_core' + window.location.pathname + 'ajax/save-edited.php', {
+						fetch('/api' + window.location.pathname + 'save-edited', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'
@@ -188,7 +188,7 @@ const iBookCtrl = () => {
 					td.addEventListener('click', (e) => {
 						if (e.target.className !== "abs") return;
 						const dataSend = { ibook_id: ibook_id, mode: 'edited_val', 'rate': 'abs', item_uin: span.dataset.send, stud_id: stud_id, item_id: td.dataset.item_id}
-						fetch('/_core' + window.location.pathname + 'ajax/save-edited.php', {
+						fetch('/api' + window.location.pathname + 'save-edited', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json'

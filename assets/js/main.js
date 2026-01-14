@@ -323,7 +323,8 @@ const getViewer = (formData) => {
 		tsasideBody = block2.getElementsByClassName('tsaside__body')[0];
 		tsaside.classList.add('show-block2');
 	}
-	fetch('/_core' + pathname + 'ajax/' + formData.get('page') + '.php', {
+	//fetch('/_core' + pathname + 'ajax/' + formData.get('page') + '.php', {
+	fetch('/api' + pathname + formData.get('page'), {
 		method: 'POST',
 		body: formData
 	})
@@ -391,7 +392,20 @@ docReady(questionFiltersHandler);
 
 const filtersHandler = () => {
 	const frm = document.getElementById('frm0');
-	const filter_names = ["filter_grm","filter_grup","filter_tutor","filter_subject","filter_sem","filter_mdl","filter_daterange"];
+	const filter_names = [
+		"filter_grm",
+		"filter_grup",
+		"filter_tutor",
+		"filter_subject",
+		"filter_sem",
+		"filter_mdl",
+		"filter_module",
+		"filter_daterange",
+		"filter_plan",
+		"filter_code",
+		"filter_semester",
+		"filter_exams"
+	];
 	filter_names.forEach((f) => {
 		const filter = document.getElementById(f);
 		if (filter !== null) {

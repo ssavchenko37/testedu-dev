@@ -1,9 +1,5 @@
 <?php
-if (strlen($tshash) != 18) die;
-
 $js_path = json_encode($sPath);
-
-$tsdata = $TS->tsdata();
 
 $period = $TS->period();
 
@@ -18,6 +14,7 @@ $facultyDean = '';
 $globalMain = true;
 $globalview = true;
 $sCore = (!empty( $sPath[1] )) ? $sPath[1] : 'home';
+$sCore = (isset($_POST['login_mode']) && $_POST['login_mode'] === "login") ? 'home': $sCore;
 $sMod = "_" . $tsdata['umod'];
 $sCore = (empty( $sPath[1] ) && !empty(($tsdata['umod'] ?? ''))) ? $sMod : $sCore;
 //$sCore = (!empty(($sPath[2] ?? ''))) ? $sCore . DIRECTORY_SEPARATOR . $sPath[2]: $sCore;
@@ -30,7 +27,11 @@ if ( $tsdata['umod'] == "s") {
 	} else {
 		$usrAvaImg = "/" . S_PIC . "/no-pic.png";
 	}
-	$userName = $usrAvaAlt = build_stud_fio($tsdata['usr']['stud_name']);
+	$userName = $usrAvaAlt = studentShort($tsdata['usr']['stud_name']);
+	if (!empty( $sPath[1] )) {
+		$globalMain = false;
+		$globalview = false;
+	}
 }
 if ( $tsdata['umod'] == "t") {
 	if (file_exists(S_ROOT . "/" . S_AVA . "/" . $tsdata['usr']['ava_img']) && !empty($tsdata['usr']['ava_img'])) {
@@ -47,6 +48,6 @@ if ( $tsdata['umod'] == "a") {
 if (is_file(S_ROOT . "/_core/" . $sCore . "/main.php") && $globalMain) {
 	include S_ROOT . "/_core/" . $sCore . "/main.php";
 }
-if (is_file(S_ROOT . "/_core/" .$sMod . "/" . $sCore . "/main.php")) {
-	include S_ROOT . "/_core/" .$sMod . "/" . $sCore . "/main.php";
+if (is_file(S_ROOT . "/_core/" . $sMod . "/" . $sCore . "/main.php")) {
+	include S_ROOT . "/_core/" . $sMod . "/" . $sCore . "/main.php";
 }

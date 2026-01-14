@@ -1,5 +1,4 @@
 <?php
-require_once '../../../kernel.php';
 $id = $_POST['pid'];
 $mode = $_POST['mod'];
 

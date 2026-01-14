@@ -72,17 +72,10 @@
 					</div>
 				</div>
 				<div class="row mt-3">
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-sm btn-main">
-							<?php _l('Применить')?>&nbsp;<?php echo mb_strtolower(_ll('Фильтры'))?>
-						</button>
+					<div class="col-sm-6">
+						<a href="/subjects/" class="btn btn-sm btn-info"> <?php _l('Очистить')?></a>
 					</div>
-					<div class="col-sm-4 text-center">
-						<a href="/subjects/" class="btn btn-sm btn-info">
-							<?php _l('Очистить')?>
-						</a>
-					</div>
-					<div class="col-sm-4 text-end">
+					<div class="col-sm-6 text-end">
 						<button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="collapse" href="#collapseCBody" role="button" aria-expanded="false" aria-controls="collapseCBody">
 							<?php _l('Закрыть')?>
 						</button>
@@ -122,7 +115,7 @@
 			<td class="align-middle"><?php echo $r['subject_credits']?></td>
 			<td class="align-middle"><?php echo $r['has_exam']?></td>
 			<td class="align-middle">
-				<a class="btn btn-sm btn-outline-secondary <?php if (empty($chaptersV3[$r['subject_code']]))  echo "disabled"?>" href="/chapters/?<?php echo $request?>" role="button">
+				<a class="get_details btn btn-sm btn-outline-secondary <?php if (empty($chaptersV3[$r['subject_code']]))  echo "disabled"?>" href="/chapters/?<?php echo $request?>" role="button">
 					<?php _l('Главы')?> <span class="badge text-bg-secondary"><?php echo (empty($chaptersV3[$r['subject_code']])) ? 0 : $chaptersV3[$r['subject_code']]?></span>
 				</a>
 			</td>

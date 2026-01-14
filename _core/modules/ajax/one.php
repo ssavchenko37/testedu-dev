@@ -1,10 +1,9 @@
 <?php
-require_once '../../../kernel.php';
 $tsdata = $TS->tsdata();
 $id = $_POST['pid'];
 $mode = $_POST['mod'];
 $tutor_id = 0;
-p($_POST);
+
 if ($tsdata['umod'] == "a") {
 	$tmp = $DB->select('SELECT * FROM ?_3v_modules');
 	$tutors_name = ($lang == "ru") 

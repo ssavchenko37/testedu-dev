@@ -72,18 +72,12 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row mt-3">
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-sm btn-main">
-							<?php _l('Применить')?>&nbsp;<?php echo mb_strtolower(_ll('Фильтры'))?>
-						</button>
+					<div class="col-sm-6">
+						<a href="/chapters/" class="btn btn-sm btn-info"> <?php _l('Очистить')?></a>
 					</div>
-					<div class="col-sm-4 text-center">
-						<a href="/chapters/" class="btn btn-sm btn-info">
-							<?php _l('Очистить')?>
-						</a>
-					</div>
-					<div class="col-sm-4 text-end">
+					<div class="col-sm-6 text-end">
 						<button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="collapse" href="#collapseCBody" role="button" aria-expanded="false" aria-controls="collapseCBody">
 							<?php _l('Закрыть')?>
 						</button>

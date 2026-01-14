@@ -48,6 +48,10 @@ h2, .h2 {
   opacity: 1;
 }
 
+.nav-sheet-period {
+  width: 160px;
+}
+
 .top-note {
   position: fixed;
   z-index: 1030;
@@ -79,6 +83,10 @@ h2, .h2 {
 
 td .btn-group .dropdown-toggle::after {
   display: inline-block;
+}
+
+.dropdown-menu strong.dropdown-item {
+  cursor: default;
 }
 
 .showed span {

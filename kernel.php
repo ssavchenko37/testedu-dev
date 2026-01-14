@@ -11,7 +11,7 @@ if (preg_match ("/(192.168|10.4.100|10.4.101|10.211.55|127.0.0)/i", $_SERVER["SE
 	define('PRO_HOST', 'http://test.edu.kg');
 	define('SURVEY_HOST', 'http://survey.test.edu.kg');
 }
-
+define('TS_SECRET', 'ce25d8f23ba');
 //#...................... Pathes
 define('S_ROOT', dirname(__FILE__));
 define('S_LIB', S_ROOT . '/_lib');
@@ -34,6 +34,25 @@ define('MAX_ATTEND_SCORE', 20);
 define('MAX_ACTIVITY_SCORE', 40);
 define('EXPIRY', 604800);
 
+$exam_statuses = array(
+	array("Pending", "text-info", "btn-info"),
+	array("Active", "text-success", "btn-success"),
+	array("Close", "text-danger", "btn-danger"),
+);
+$exam_modes = array("pending","active","close");
+
+$module_statuses = array(
+	array("Pending", "text-info", "btn-info"),
+	array("Active", "text-success", "btn-success"),
+	array("Close", "text-danger", "btn-danger"),
+	array("Deleted", "text-secondary", "btn-secondary")
+);
+$module_modes = array("pending","active","close");
+
+$modulesMeta = array(
+	"modes" => array("pending","active","close","deleted"),
+	"statuses" => array(array("Pending","info"), array("Active","success"), array("Close","danger"), array("Deleted","secondary"))
+);
 
 //#...................... General options
 // Include in All script
@@ -85,24 +104,3 @@ $tsreq  = $pathInfo[4];
 include "__outsider/lang/_" . $lang . ".php";
 
 $TS = new TS_cli;
-
-$exam_statuses = array(
-	array("Pending", "text-info", "btn-info"),
-	array("Active", "text-success", "btn-success"),
-	array("Close", "text-danger", "btn-danger"),
-);
-$exam_modes = array("pending","active","close");
-
-$module_statuses = array(
-	array("Pending", "text-info", "btn-info"),
-	array("Active", "text-success", "btn-success"),
-	array("Close", "text-danger", "btn-danger"),
-	array("Deleted", "text-secondary", "btn-secondary")
-);
-$module_modes = array("pending","active","close");
-
-$modulesMeta = array(
-	"modes" => array("pending","active","close","deleted"),
-	"statuses" => array(array("Pending","info"), array("Active","success"), array("Close","danger"), array("Deleted","secondary"))
-);
-

@@ -15,7 +15,7 @@ const iBookCtrl = () => {
 			const isAbs = (td.classList.contains('bg-abs')) ? 0: 1;
 			const dataSend = { ibook_id: ibook_id, mode: 'trigger_abs', 'rate': isAbs, item_id: td.dataset.item_id}
 				
-			fetch('/_core' + window.location.pathname + 'ajax/save-edited.php', {
+			fetch('/api' + window.location.pathname + 'save-edited', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

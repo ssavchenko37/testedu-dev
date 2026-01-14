@@ -75,13 +75,14 @@
 								$r = $ibooks[$i];
 								$what = ($r['ibook_type'] == "pr") ? "Практика": "Лекция";
 								$subj_title = ($lang == "en") ? $r['subject_title']: $r['subject_ru'];
+								$request = $TS->request_encode('ibcode', $r['ibook_id']);
 								?>
 								<tr>
 									<td><?php _l($what)?></td>
 									<td><?php echo $r['semester_title']?></td>
 									<td><?php echo $r['grup_title']?></td>
 									<td><?php echo $subj_title?></td>
-									<td><a href="/ibooks/<?php echo $r['ibook_id']?>/"><i class="fa-solid fa-link"></i></a></td>
+									<td><a href="/ibook/?<?php echo $request?>"><i class="fa-solid fa-link"></i></a></td>
 								</tr>
 								<?php
 							}
@@ -91,7 +92,7 @@
 				</div>
 			</div>
 			<div class="card-footer bg-body-tertiary p-0">
-				<a class="h6 text-main d-inline-block py-2 px-3 my-1" href="/ibook/"><?php _l("Показать все")?> <?php echo mb_strtolower(_ll("Журналы"))?></a>
+				<a class="h6 text-main d-inline-block py-2 px-3 my-1" href="/ibooks/"><?php _l("Показать все")?> <?php echo mb_strtolower(_ll("Журналы"))?></a>
 			</div>
 		</div>
 	</div>
@@ -109,13 +110,14 @@
 								$r = $sheets[$i];
 								$what = ($r['exam_id'] > 0) ? "Экзамен": "Зачет";
 								$subj_title = ($lang == "en") ? $r['subject_title']: $r['subject_ru'];
+								$request = $TS->request_encode('shcode', $r['sheet_id']);
 								?>
 								<tr>
 									<td><?php _l($what)?></td>
 									<td><?php echo $r['semester_title']?></td>
 									<td><?php echo $r['grup_title']?></td>
 									<td><?php echo $subj_title?></td>
-									<td><a href="/sheets/<?php echo $r['sheet_id']?>/"><i class="fa-solid fa-link"></i></a></td>
+									<td><a href="/sheet/?<?php echo $request?>"><i class="fa-solid fa-link"></i></a></td>
 								</tr>
 								<?php
 							}
@@ -146,13 +148,14 @@
 								$str_groups = module_groups($module_groups, $r['module_id']);
 								$str_chapters = module_chapters($module_chapters, $r['module_id'], "string");
 								$status_info = $module_statuses[$r['module_status']];
+								$request = $TS->request_encode('mdcode', $r['module_id']);
 								?>
 								<tr>
 									<td><?php echo $r['sDate']?></td>
 									<td><?php echo $str_groups?></td>
 									<td><?php echo $str_chapters?></td>
 									<td><?php echo $status_info?></td>
-									<td><a href="/modules/<?php echo $r['ibook_id']?>/"><i class="fa-solid fa-link"></i></a></td>
+									<td><a href="/module/?<?php echo $request?>"><i class="fa-solid fa-link"></i></a></td>
 								</tr>
 								<?php
 							}

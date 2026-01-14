@@ -1,4 +1,10 @@
 <?php
+if ($tshash ?? '') {
+	if (strlen($tshash) != 18) die;
+} else {
+	die;
+}
+
 // require_once 'thiscalss.php';
 // $TStutors = new TS_tutors;
 if (!empty($tsreq)) {
@@ -25,7 +31,6 @@ foreach($TS->tutorDept() as $r) {
 foreach($TS->tutorSubj() as $r) {
 	$tutors_subjects[$r['tutor_id']][] = $r;
 }
-
 
 if (!empty($dcode)) {
 	$dcode = $TS->request_decode('dcode',$tsreq);

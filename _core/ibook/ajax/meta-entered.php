@@ -1,10 +1,7 @@
 <?php
-require_once '../../../kernel.php';
 header('Content-Type: application/json; charset=utf-8');
 
-$tsdata = $TS->tsdata();
 $usr = $tsdata['usr']['iid'];
-//$tid = ($tsdata['umod'] == "a") ? $tsdata['usr']['id']: $tsdata['usr']['tutor_id'];
 
 $json = file_get_contents('php://input');
 $post = json_decode($json, true);

@@ -23,7 +23,7 @@ const pageInit = () => {
 		mode: 'module',
 		id: pid.value
 	};
-	fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+	fetch('/api' + window.location.pathname + 'handlers', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const moduleHandler = (mdate) => {
 			modulenum: module_num.value
 		};
 
-		fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+		fetch('/api' + window.location.pathname + 'handlers', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ const moduleHandler = (mdate) => {
 			semester: module_semester.value
 		};
 
-		fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+		fetch('/api' + window.location.pathname + 'handlers', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -142,7 +142,7 @@ const moduleHandler = (mdate) => {
 			module_subject: module_subject.value
 		};
 
-		fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+		fetch('/api' + window.location.pathname + 'handlers', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -178,7 +178,7 @@ const moduleHandler = (mdate) => {
 			tutor_id: tutor.value
 		};
 
-		fetch('/_core' + window.location.pathname + 'ajax/handlers.php', {
+		fetch('/api' + window.location.pathname + 'handlers', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

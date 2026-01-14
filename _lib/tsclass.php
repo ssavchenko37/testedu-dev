@@ -22,7 +22,7 @@ class TS_cli
 		$this->lang = $lang;
 		$this->period_uin = $this->period()['uin'];
 		if (isset($_COOKIE['ts_sys'])) {
-			$ts_sys = cook2code($_COOKIE['ts_sys']);
+			$ts_sys = cook2auth($_COOKIE['ts_sys']);
 			if ($ts_sys->id > 0) {
 				$this->ts['id'] = $ts_sys->id;
 				$this->ts['umod'] = $ts_sys->umod;
@@ -146,7 +146,7 @@ class TS_cli
 	}
 	public function tutorSubj($tutor_id=false, $t_s_id=false)
 	{
-		return $this->db->select('SELECT TS.t_s_id, TS.tutor_id'
+		return $this->db->select('SELECT TS.t_s_id, TS.tutor_id, TS.stype'
 			. ', TS.entered AS ts_entered, TS.who_set'
 			. ', S.*'
 			. ', D.dept_title, D.dept_ru'
@@ -161,7 +161,7 @@ class TS_cli
 			. ' INNER JOIN ?_3v_semesters SEM ON S.semester_id=SEM.semester_id'
 			. ' WHERE 1=1 {AND TS.period=?}'
 			. ' {AND TS.tutor_id=?} {AND TS.t_s_id=?}'
-			. ' ORDER BY S.semester_id, S.subject_uin'
+			. ' ORDER BY S.semester_id, S.subject_uin, TS.grm_id, TS.stype'
 			, ( $this->period_uin ) ? $this->period_uin: DBSIMPLE_SKIP
 			, ( $tutor_id ) ? $tutor_id : DBSIMPLE_SKIP
 			, ( $t_s_id ) ? $t_s_id : DBSIMPLE_SKIP
